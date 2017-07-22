@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
         CRBT.initializeWithDelay(this,3,1000); //start with your own delay (context,your app id,delay in ms)
 
 
-        CRBT.initialize(this,3);//start with our default (context,your app id)
+        //CRBT.initialize(this,3);//start with our default (context,your app id)
 
 
-        int score =CRBT.getUserScore(this);//get user score (context)
+        //int score =CRBT.getUserScore(this);//get user score (context)
 
 
-        CRBT.startCrbtProfileActivity(this);//show profile page (context)
+        //CRBT.startCrbtProfileActivity(this);//show profile page (context)
         //*******************crbtend************************
 
 
