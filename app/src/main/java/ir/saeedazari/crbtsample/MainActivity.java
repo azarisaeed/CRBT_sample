@@ -21,26 +21,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //*******************crbtpermission************************
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            CRBT.initializeWithDelay(this, 3, 1000); //start with your own delay (context,your app id,delay in ms)
+
+
+            //CRBT.initialize(this,3);//start with our default (context,your app id)
+
+
+            //int score =CRBT.getUserScore(this);//get user score (context)
+
+
+            //CRBT.startCrbtProfileActivity(this);//show profile page (context)
+        }
+        else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                     CRBT_PERMISSION_REQUEST);
         }
         //*******************crbtpermission************************
-
-        //*******************crbt************************
-        CRBT.initializeWithDelay(this,3,1000); //start with your own delay (context,your app id,delay in ms)
-
-
-        //CRBT.initialize(this,3);//start with our default (context,your app id)
-
-
-        //int score =CRBT.getUserScore(this);//get user score (context)
-
-
-        //CRBT.startCrbtProfileActivity(this);//show profile page (context)
-        //*******************crbtend************************
-
 
         LinearLayout la = (LinearLayout) findViewById(R.id.click);
         la.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +52,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    //*******************crbtpermission************************
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == CRBT_PERMISSION_REQUEST){
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                CRBT.initializeWithDelay(this, 3, 1000); //start with your own delay (context,your app id,delay in ms)
+
+                //CRBT.initialize(this,3);//start with our default (context,your app id)
+
+
+                //int score =CRBT.getUserScore(this);//get user score (context)
+
+
+                //CRBT.startCrbtProfileActivity(this);//show profile page (context)
+            }
+            else {
+                //CRBT cannot run without this permission, You can warn user that this permissions are necessary to start app
+                //and request permissions again
+            }
+        }
+    }
+    //*******************crbtpermission************************
 
 }
